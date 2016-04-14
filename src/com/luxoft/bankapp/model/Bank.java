@@ -1,19 +1,16 @@
 package com.luxoft.bankapp.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import com.luxoft.bankapp.service.Report;
 
 public class Bank implements Report{
 	
-	private List<Client> clients;
+	private Set<Client> clients;
 	private List<ClientRegistrationListener> listeners;
 	
 	public Bank() {
-		clients = new LinkedList<Client>();
+		clients = new HashSet<Client>();
 		listeners = new ArrayList<ClientRegistrationListener>();
 		listeners.add(new PrintClientListener());
 		listeners.add(new EmailNotificationListener());
@@ -44,8 +41,8 @@ public class Bank implements Report{
 		clients.remove(client);
 	}
 	
-	public List<Client> getClients() {
-		return Collections.unmodifiableList(clients);
+	public Set<Client> getClients() {
+		return Collections.unmodifiableSet(clients);
 	}
 
 	@Override

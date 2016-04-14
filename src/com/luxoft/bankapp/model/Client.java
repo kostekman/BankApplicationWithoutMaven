@@ -1,8 +1,6 @@
 package com.luxoft.bankapp.model;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import com.luxoft.bankapp.service.Report;
 
@@ -15,7 +13,7 @@ public class Client implements Report{
 	private Gender gender;
 	private String phoneNumber;
 	private String email;
-	private List<Account> accounts;
+	private Set<Account> accounts;
 	private Account activeAccount = null;
 	private float initialOverdraft;
 	
@@ -27,7 +25,7 @@ public class Client implements Report{
 		this.name = name;
 		this.gender = gender;
 		this.initialOverdraft = initialOverdraft;
-		this.accounts = new LinkedList<Account>();
+		this.accounts = new HashSet<Account>();
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.ID = nextID++;
@@ -59,8 +57,8 @@ public class Client implements Report{
 		return ID;
 	}
 
-	public List<Account> getAccounts() {
-		return Collections.unmodifiableList(accounts);
+	public Set<Account> getAccounts() {
+		return Collections.unmodifiableSet(accounts);
 	}
 	
 	public void addAccount(Account account){
@@ -125,10 +123,6 @@ public class Client implements Report{
 
 	public Account getActiveAccount() {
 		return activeAccount;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 	@Override
