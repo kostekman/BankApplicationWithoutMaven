@@ -10,7 +10,12 @@ public class Bank implements Report{
 	private List<ClientRegistrationListener> listeners;
 	
 	public Bank() {
-		clients = new HashSet<Client>();
+		clients =  new TreeSet<Client>(new Comparator<Client>() {
+			@Override
+			public int compare(Client c1, Client c2) {
+				return c1.getCity().compareTo(c2.getCity());
+			}
+		});
 		listeners = new ArrayList<ClientRegistrationListener>();
 		listeners.add(new PrintClientListener());
 		listeners.add(new EmailNotificationListener());

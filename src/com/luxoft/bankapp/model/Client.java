@@ -10,6 +10,7 @@ public class Client implements Report{
 	
 	private String name;
 	private int ID;
+	private String city;
 	private Gender gender;
 	private String phoneNumber;
 	private String email;
@@ -21,8 +22,9 @@ public class Client implements Report{
 		this.name = "";
 	}
 	
-	public Client(String name, Gender gender, String email, String phoneNumber, float initialOverdraft) {
+	public Client(String name, String city, Gender gender, String email, String phoneNumber, float initialOverdraft) {
 		this.name = name;
+		this.city = city;
 		this.gender = gender;
 		this.initialOverdraft = initialOverdraft;
 		this.accounts = new HashSet<Account>();
@@ -83,6 +85,16 @@ public class Client implements Report{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 
 	public Gender getGender() {
 		return gender;

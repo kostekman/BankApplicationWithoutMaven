@@ -15,19 +15,32 @@ public class AddClientCommand extends AbstractCommand implements Command {
 	@Override
 	public void execute(Bank bank) {
 		String name = "";
-		while(!isCorrectData()){
+		while(!isCorrectData()) {
 			System.out.println("Please type the name of the new client as follows: \"name surname\".");
 			name = BankScanner.getScanner().nextLine();
 			setNameMatcher(getNamePattern().matcher(name));
 			setCorrectData(getNamePattern().matcher(name).matches());
-			if(!isCorrectData()){
+			if (!isCorrectData()) {
 				System.out.println("The name you entered is incorrect");
 			}
-			
+
 		}
-		
 		setCorrectData(false);
-		
+
+		String city = "";
+		while(!isCorrectData()){
+			System.out.println("Please type the city of the new client.");
+			name = BankScanner.getScanner().nextLine();
+			setCityMatcher(getCityPattern().matcher(name));
+			setCorrectData(getCityPattern().matcher(name).matches());
+			if(!isCorrectData()){
+				System.out.println("The data you entered is incorrect");
+			}
+
+		}
+		setCorrectData(false);
+
+
 		String email = "";
 		while(!isCorrectData()){
 			System.out.println("Please type an e-mail of the client");
@@ -89,7 +102,7 @@ public class AddClientCommand extends AbstractCommand implements Command {
 		else{
 			enumGender = Gender.FEMALE;
 		}
-		Client newClient = new Client(name, enumGender, email, phoneNumber, Float.valueOf(overdraft));
+		Client newClient = new Client(name, city, enumGender, email, phoneNumber, Float.valueOf(overdraft));
 		getBankService().addClient(bank, newClient);
 		setActiveClient(newClient);
 		System.out.println("Client successfully created");

@@ -14,11 +14,14 @@ public abstract class AbstractCommand implements Command {
 	private Pattern numberPattern = Pattern.compile("[0-9]+?(.[0-9]+)");
 	private Matcher numberMatcher;
 	
-	private Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+	private Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9_!#$%&ï¿½*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 	private Matcher emailMatcher;
 	
 	private Pattern phoneNumberPattern = Pattern.compile("^(\\+[0-9]{2})?[0-9]{9}$");
 	private Matcher phoneNumberMatcher;
+
+	private  Pattern cityPattern = Pattern.compile("[A-Z][a-z]*( [A-Z][a-z]*)*");
+	private Matcher cityMatcher;
 
 	private BankService bankService;
 	private static Client activeClient = null; 
@@ -70,6 +73,18 @@ public abstract class AbstractCommand implements Command {
 
 	public Pattern getPhoneNumberPattern() {
 		return phoneNumberPattern;
+	}
+
+	public Pattern getCityPattern() {
+		return cityPattern;
+	}
+
+	public Matcher getCityMatcher() {
+		return cityMatcher;
+	}
+
+	public void setCityMatcher(Matcher cityMatcher) {
+		this.cityMatcher = cityMatcher;
 	}
 
 	public AbstractCommand(BankService bankService){
