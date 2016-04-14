@@ -25,10 +25,6 @@ public abstract class AbstractAccountBalanceModifierCommand extends AbstractComm
 	}
 	
 	public void depositOnAccount(String amount){
-		if(getActiveClient().getActiveAccount() == null){
-			System.out.println("This client has no account yet, please create an account");
-			return;
-		}
 		getActiveClient().getActiveAccount().deposit(Float.valueOf(amount));
 		System.out.printf("You have successfully deposited %s on the account", amount);
 	}
