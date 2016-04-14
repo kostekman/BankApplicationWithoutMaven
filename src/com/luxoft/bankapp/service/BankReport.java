@@ -43,21 +43,43 @@ public class BankReport {
     }
 
     public void getClientsByCity(Bank bank){
-        Map<Client, String> clientMap = new TreeMap<Client, String>();
+        Set<String> citySet = new HashSet<>();
 
-        for(Client client : bank.getClients()){
-            clientMap.put(client, client.getCity());
-        }
-
-        Map<String, Set<Client>> cityMap = new TreeMap<String, Set<Client>>(new Comparator<String>(){
+        Map<String, Set<Client>> cityMultiMap = new TreeMap<>(new Comparator<String>(){
             @Override
             public int compare(String o1, String o2) {
                 return o1.compareTo(o2);
             }
         });
 
+        for(Client client : bank.getClients()){
+            citySet.add(client.getCity());
+        }
+        for(String city : citySet){
+
+            Set<Client> clientsInCity = new TreeSet<>(new Comparator<Client>() {
+                @Override
+                public int compare(Client o1, Client o2) {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+
+            for(Client client : bank.getClients()){
+                if(client.getCity().equals(city)){
+                    clientsInCity.add(client);
+                }
+            }
+            cityMultiMap.put(city, clientsInCity);
+        }
 
         System.out.println("Clients sorted by city");
+
+        for(String city : cityMultiMap.keySet()){
+            System.out.println("City: " + city);
+            for(Client client : cityMultiMap.get(city)){
+                System.out.println(client.getName());
+            }
+        }
 
 
     }

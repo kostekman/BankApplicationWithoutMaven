@@ -9,10 +9,6 @@ public class BankScanner {
 		return scanner;
 	}
 
-	public static void setScanner(Scanner s) {
-		BankScanner.scanner = s;
-	}
-	
 	public static void closeScanner(){
 		scanner.close();
 	}
