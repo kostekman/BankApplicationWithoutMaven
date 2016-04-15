@@ -32,27 +32,21 @@ public class Client implements Report{
 		this.phoneNumber = phoneNumber;
 		this.ID = nextID++;
 	}
-	
+
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ID;
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Client client = (Client) o;
+
+		return name != null ? name.equals(client.name) : client.name == null;
+
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Client))
-			return false;
-		Client other = (Client) obj;
-		if (ID != other.ID)
-			return false;
-		return true;
+	public int hashCode() {
+		return name != null ? name.hashCode() : 0;
 	}
 
 	public int getID() {
