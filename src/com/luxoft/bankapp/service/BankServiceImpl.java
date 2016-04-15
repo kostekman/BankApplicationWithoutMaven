@@ -25,15 +25,10 @@ public class BankServiceImpl implements BankService {
 	public void setActiveAccount(Client client, Account account) {
 		client.setActiveAccount(account);
 	}
-	
+
 	@Override
-	public Client findClient(Bank bank, String name){
-		for(Client client : bank.getClients()){
-			if(client.getName().equals(name)){
-				return client;
-			}
-		}
-		return null; //TO IMPROVE
+	public Client findClient(Bank bank, String name) {
+		return bank.getClientNameMap().get(name);
 	}
 
 }

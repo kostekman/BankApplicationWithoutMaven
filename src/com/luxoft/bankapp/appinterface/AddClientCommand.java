@@ -23,6 +23,10 @@ public class AddClientCommand extends AbstractCommand implements Command {
 			if (!isCorrectData()) {
 				System.out.println("The name you entered is incorrect");
 			}
+			else if(bank.getClientNameMap().get(name) != null){
+				System.out.println("Client already exists in system");
+				setCorrectData(false);
+			}
 
 		}
 		setCorrectData(false);
@@ -92,7 +96,7 @@ public class AddClientCommand extends AbstractCommand implements Command {
 			else{
 				setCorrectData(true);
 			}
-		};
+		}
 		setCorrectData(false);
 		
 		Gender enumGender;
