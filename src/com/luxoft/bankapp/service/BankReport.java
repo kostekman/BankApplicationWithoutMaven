@@ -55,6 +55,7 @@ public class BankReport {
         for(Client client : bank.getClients()){
             citySet.add(client.getCity());
         }
+        
         for(String city : citySet){
 
             Set<Client> clientsInCity = new TreeSet<>(new Comparator<Client>() {
@@ -64,12 +65,11 @@ public class BankReport {
                 }
             });
 
-            for(Client client : bank.getClients()){
-                if(client.getCity().equals(city)){
-                    clientsInCity.add(client);
-                }
-            }
             cityMultiMap.put(city, clientsInCity);
+        }
+
+        for(Client client : bank.getClients()){
+            cityMultiMap.get(client.getCity()).add(client);
         }
 
         System.out.println("Clients sorted by city");
