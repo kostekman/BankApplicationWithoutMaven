@@ -1,19 +1,9 @@
 package com.luxoft.bankapp.service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-
 import com.luxoft.bankapp.datagenarator.DataGenerator;
-import com.luxoft.bankapp.exceptions.BankException;
-import com.luxoft.bankapp.model.Account;
 import com.luxoft.bankapp.model.Bank;
-import com.luxoft.bankapp.model.CheckingAccount;
-import com.luxoft.bankapp.model.Client;
-import com.luxoft.bankapp.model.Gender;
-import com.luxoft.bankapp.model.SavingAccount;
+
+import java.util.Random;
 
 public class BankApplication {
 	
@@ -64,38 +54,45 @@ public class BankApplication {
 		
 	}*/
 	
-	private static void modifyBank(){
-		List<Client> clients = bank.getClients();
-		for(Client client : clients){
-			List<Account> accounts = client.getAccounts();
-			for(Account account : accounts){
-				if(r.nextBoolean()){
-					if(r.nextBoolean()){
-						account.deposit(Math.abs(r.nextFloat()*(float)Math.abs(r.nextInt())%1000));
-					} else
-						try {
-							account.withdraw(Math.abs(r.nextFloat()*(float)Math.abs(r.nextInt())%1000));
-						} catch (BankException e) {
-							System.out.printf("You have exceeded possible withdraw by: %f", e.toString());
-							e.printStackTrace();
-						}
-				}
-			}
-		}
-	}
+//	private static void modifyBank(){
+//		List<Client> clients = bank.getClients();
+//		for(Client client : clients){
+//			List<Account> accounts = client.getAccounts();
+//			for(Account account : accounts){
+//				if(r.nextBoolean()){
+//					if(r.nextBoolean()){
+//						account.deposit(Math.abs(r.nextFloat()*(float)Math.abs(r.nextInt())%1000));
+//					} else
+//						try {
+//							account.withdraw(Math.abs(r.nextFloat()*(float)Math.abs(r.nextInt())%1000));
+//						} catch (BankException e) {
+//							System.out.printf("You have exceeded possible withdraw by: %f", e.toString());
+//							e.printStackTrace();
+//						}
+//				}
+//			}
+//		}
+//	}
 
 	public static void main(String[] args) {
 		if(args.length == 3 && args[0].equals("-gD")) {
 			DataGenerator.generateData(fileName, csvSeparator, Integer.parseInt(args[1]), Integer.parseInt(args[2]));
 		}
+		else if(args.length == 1 && args[0].equals("-report")){
+			BankReport bankReporter = new BankReport();
+			bankReporter.getNumberOfClients(bank);
+			bankReporter.getAccountsNumber(bank);
+			bankReporter.getBankCreditSum(bank);
+			bankReporter.getClientsSorted(bank);
+			bankReporter.getClientsByCity(bank);
+		}
 
-		//initialize();
 		bank.printReport();
 		System.out.println("\n------------------------------------------");
-		modifyBank();
 		bank.printReport();
 	}
 
-	
+
+
 
 }
